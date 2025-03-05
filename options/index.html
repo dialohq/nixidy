@@ -897,9 +897,36 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#applicationsnamesyncpolicymanagednamespacemetadataannotations" class="md-nav__link">
+    <span class="md-ellipsis">
+      applications.&lt;name&gt;.syncPolicy.managedNamespaceMetadata.annotations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applicationsnamesyncpolicymanagednamespacemetadatalabels" class="md-nav__link">
+    <span class="md-ellipsis">
+      applications.&lt;name&gt;.syncPolicy.managedNamespaceMetadata.labels
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#applicationsnamesyncpolicysyncoptionsapplyoutofsynconly" class="md-nav__link">
     <span class="md-ellipsis">
       applications.&lt;name&gt;.syncPolicy.syncOptions.applyOutOfSyncOnly
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applicationsnamesyncpolicysyncoptionscreatenamespace" class="md-nav__link">
+    <span class="md-ellipsis">
+      applications.&lt;name&gt;.syncPolicy.syncOptions.createNamespace
     </span>
   </a>
   
@@ -1497,9 +1524,36 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#applicationsnamesyncpolicymanagednamespacemetadataannotations" class="md-nav__link">
+    <span class="md-ellipsis">
+      applications.&lt;name&gt;.syncPolicy.managedNamespaceMetadata.annotations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applicationsnamesyncpolicymanagednamespacemetadatalabels" class="md-nav__link">
+    <span class="md-ellipsis">
+      applications.&lt;name&gt;.syncPolicy.managedNamespaceMetadata.labels
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#applicationsnamesyncpolicysyncoptionsapplyoutofsynconly" class="md-nav__link">
     <span class="md-ellipsis">
       applications.&lt;name&gt;.syncPolicy.syncOptions.applyOutOfSyncOnly
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applicationsnamesyncpolicysyncoptionscreatenamespace" class="md-nav__link">
+    <span class="md-ellipsis">
+      applications.&lt;name&gt;.syncPolicy.syncOptions.createNamespace
     </span>
   </a>
   
@@ -2215,10 +2269,41 @@ boolean</p>
 <ul>
 <li><a href="https://github.com/arnarg/nixidy/blob/main/modules/applications">&lt;nixidy/modules/applications&gt;</a></li>
 </ul>
+<h2 id="applicationsnamesyncpolicymanagednamespacemetadataannotations">applications.&lt;name&gt;.syncPolicy.managedNamespaceMetadata.annotations<a class="headerlink" href="#applicationsnamesyncpolicymanagednamespacemetadataannotations" title="Permanent link">#</a></h2>
+<p>Annotations to apply to the managed namespace when created by Argo CD.</p>
+<p><strong><em>Type:</em></strong>
+attribute set of string</p>
+<p><strong><em>Default:</em></strong>
+<code class="highlight"><span class="p">{</span> <span class="p">}</span></code></p>
+<p><strong><em>Declared by:</em></strong></p>
+<ul>
+<li><a href="https://github.com/arnarg/nixidy/blob/main/modules/applications">&lt;nixidy/modules/applications&gt;</a></li>
+</ul>
+<h2 id="applicationsnamesyncpolicymanagednamespacemetadatalabels">applications.&lt;name&gt;.syncPolicy.managedNamespaceMetadata.labels<a class="headerlink" href="#applicationsnamesyncpolicymanagednamespacemetadatalabels" title="Permanent link">#</a></h2>
+<p>Labels to apply to the managed namespace when created by Argo CD.</p>
+<p><strong><em>Type:</em></strong>
+attribute set of string</p>
+<p><strong><em>Default:</em></strong>
+<code class="highlight"><span class="p">{</span> <span class="p">}</span></code></p>
+<p><strong><em>Declared by:</em></strong></p>
+<ul>
+<li><a href="https://github.com/arnarg/nixidy/blob/main/modules/applications">&lt;nixidy/modules/applications&gt;</a></li>
+</ul>
 <h2 id="applicationsnamesyncpolicysyncoptionsapplyoutofsynconly">applications.&lt;name&gt;.syncPolicy.syncOptions.applyOutOfSyncOnly<a class="headerlink" href="#applicationsnamesyncpolicysyncoptionsapplyoutofsynconly" title="Permanent link">#</a></h2>
 <p>Currently when syncing using auto sync Argo CD applies every object in the application.
 For applications containing thousands of objects this takes quite a long time and puts undue pressure on the api server.
 Turning on selective sync option which will sync only out-of-sync resources.</p>
+<p><strong><em>Type:</em></strong>
+boolean</p>
+<p><strong><em>Default:</em></strong>
+<code class="highlight"><span class="no">false</span></code></p>
+<p><strong><em>Declared by:</em></strong></p>
+<ul>
+<li><a href="https://github.com/arnarg/nixidy/blob/main/modules/applications">&lt;nixidy/modules/applications&gt;</a></li>
+</ul>
+<h2 id="applicationsnamesyncpolicysyncoptionscreatenamespace">applications.&lt;name&gt;.syncPolicy.syncOptions.createNamespace<a class="headerlink" href="#applicationsnamesyncpolicysyncoptionscreatenamespace" title="Permanent link">#</a></h2>
+<p>Argo CD Application can be configured so it will create the namespace specified in spec.destination.namespace if it doesn't exist already. Without this either declared in the Application manifest or passed in the CLI via --sync-option CreateNamespace=true, the Application will fail to sync if the namespace doesn't exist.</p>
+<p>Note that the namespace to be created must be informed in the spec.destination.namespace field of the Application resource. The metadata.namespace field in the Application's child manifests must match this value, or can be omitted, so resources are created in the proper destination.</p>
 <p><strong><em>Type:</em></strong>
 boolean</p>
 <p><strong><em>Default:</em></strong>
