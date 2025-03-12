@@ -196,37 +196,41 @@ in {
                     then app.annotations
                     else null;
                 };
-                spec = {
-                  inherit (app) project;
+                spec =
+                  {
+                    inherit (app) project;
 
-                  source = {
-                    repoURL = cfg.target.repository;
-                    targetRevision = cfg.target.branch;
-                    path = lib.path.subpath.join [
-                      cfg.target.rootPath
-                      app.output.path
-                    ];
+                    source = {
+                      repoURL = cfg.target.repository;
+                      targetRevision = cfg.target.branch;
+                      path = lib.path.subpath.join [
+                        cfg.target.rootPath
+                        app.output.path
+                      ];
+                    };
+                    destination = {
+                      inherit (app) namespace;
+                      inherit (app.destination) server;
+                    };
+
+                    inherit (app) ignoreDifferences;
+                  }
+                  // lib.optionalAttrs (app.syncPolicy.autoSync.enable || lib.length app.syncPolicy.finalSyncOpts > 0 || (app.syncPolicy.managedNamespaceMetadata.labels != {} || app.syncPolicy.managedNamespaceMetadata.annotations != {})) {
+                    syncPolicy =
+                      (lib.optionalAttrs app.syncPolicy.autoSync.enable {
+                        automated = {
+                          inherit (app.syncPolicy.autoSync) prune selfHeal;
+                        };
+                      })
+                      // (lib.optionalAttrs (lib.length app.syncPolicy.finalSyncOpts > 0) {
+                        syncOptions = app.syncPolicy.finalSyncOpts;
+                      })
+                      // (lib.optionalAttrs (app.syncPolicy.managedNamespaceMetadata.labels != {} || app.syncPolicy.managedNamespaceMetadata.annotations != {}) {
+                        managedNamespaceMetadata = lib.filterAttrs (_: v: v != {}) {
+                          inherit (app.syncPolicy.managedNamespaceMetadata) labels annotations;
+                        };
+                      });
                   };
-                  destination = {
-                    inherit (app) namespace;
-                    inherit (app.destination) server;
-                  };
-                  syncPolicy =
-                    (lib.optionalAttrs app.syncPolicy.autoSync.enable {
-                      automated = {
-                        inherit (app.syncPolicy.autoSync) prune selfHeal;
-                      };
-                    })
-                    // (lib.optionalAttrs (lib.length app.syncPolicy.finalSyncOpts > 0) {
-                      syncOptions = app.syncPolicy.finalSyncOpts;
-                    })
-                    // (lib.optionalAttrs (app.syncPolicy.managedNamespaceMetadata.labels != {} || app.syncPolicy.managedNamespaceMetadata.annotations != {}) {
-                      managedNamespaceMetadata = lib.filterAttrs (_: v: v != {}) {
-                        inherit (app.syncPolicy.managedNamespaceMetadata) labels annotations;
-                      };
-                    });
-                  inherit (app) ignoreDifferences;
-                };
               };
             }
           )
