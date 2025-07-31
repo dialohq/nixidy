@@ -91,7 +91,7 @@ function doBuildFlake() {
     exit 1
   fi
   
-  nix build "${FLAKE_ROOT}#nixidyEnvs.${NIX_SYSTEM}.${FLAKE_ENV}.environmentPackage" "${BUILD_PARAMS[@]}"
+  nix build --show-trace -L "${FLAKE_ROOT}#nixidyEnvs.${NIX_SYSTEM}.${FLAKE_ENV}.environmentPackage" "${BUILD_PARAMS[@]}"
 }
 
 function doSwitch() {
