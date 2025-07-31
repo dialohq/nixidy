@@ -239,6 +239,7 @@ while [[ $# -gt 0 ]]; do
     *)
       # If we've already found the command and env param, treat everything else as extra params
       if [[ -n "$ENV_PARAM" ]]; then
+        echo "Unknown option: $opt"
         BUILD_PARAMS+=("$opt")
       else
         ENV_PARAM="$opt"
