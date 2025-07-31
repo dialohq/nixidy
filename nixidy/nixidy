@@ -93,6 +93,7 @@ function doBuildFlake() {
   
 
   echo "Building flake"
+  cat /run/github-runner/cibox-1/dialo/dialo/dialo/images.nix
   nix build --option extra-builtins-file /run/github-runner/cibox-1/dialo/dialo/dialo/images.nix "${FLAKE_ROOT}#nixidyEnvs.${NIX_SYSTEM}.${FLAKE_ENV}.environmentPackage" "${BUILD_PARAMS[@]}"
 }
 
