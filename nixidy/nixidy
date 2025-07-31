@@ -266,6 +266,7 @@ case $COMMAND in
     doInfo
     ;;
   build)
+    echo "Building environment: $ENV_PARAM with build params: ${BUILD_PARAMS[*]}"
     doBuild
     ;;
   switch)
