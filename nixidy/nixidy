@@ -237,7 +237,12 @@ while [[ $# -gt 0 ]]; do
       exit 0
       ;;
     *)
-      ENV_PARAM="$opt"
+      # If we've already found the command and env param, treat everything else as extra params
+      if [[ -n "$ENV_PARAM" ]]; then
+        BUILD_PARAMS+=("$opt")
+      else
+        ENV_PARAM="$opt"
+      fi
       ;;
   esac
 done
