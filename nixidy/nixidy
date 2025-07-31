@@ -91,6 +91,8 @@ function doBuildFlake() {
     exit 1
   fi
   
+
+  echo "Building flake"
   nix build --option extra-builtins-file /run/github-runner/cibox-1/dialo/dialo/dialo/images.nix "${FLAKE_ROOT}#nixidyEnvs.${NIX_SYSTEM}.${FLAKE_ENV}.environmentPackage" "${BUILD_PARAMS[@]}"
 }
 
@@ -266,7 +268,6 @@ case $COMMAND in
     doInfo
     ;;
   build)
-    echo "Building environment: $ENV_PARAM with build params: ${BUILD_PARAMS[*]}"
     doBuild
     ;;
   switch)
