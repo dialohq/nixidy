@@ -91,7 +91,7 @@ function doBuildFlake() {
     exit 1
   fi
   
-  nix build --show-trace -L "${FLAKE_ROOT}#nixidyEnvs.${NIX_SYSTEM}.${FLAKE_ENV}.environmentPackage" "${BUILD_PARAMS[@]}"
+  nix build --option extra-builtins-file /run/github-runner/cibox-1/dialo/dialo/dialo/images.nix "${FLAKE_ROOT}#nixidyEnvs.${NIX_SYSTEM}.${FLAKE_ENV}.environmentPackage" "${BUILD_PARAMS[@]}"
 }
 
 function doSwitch() {
@@ -207,8 +207,6 @@ FILE_PARAM=""
 
 BUILD_PARAMS=()
 INFO_JSON="false"
-
-echo "all options: $@"
 
 while [[ $# -gt 0 ]]; do
   opt="$1"
